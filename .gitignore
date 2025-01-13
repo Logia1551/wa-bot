@@ -1,0 +1,5 @@
+# Buat file .gitignore dan tambahkan:
+node_modules/
+auth_info_baileys/
+.env
+package-lock.json
