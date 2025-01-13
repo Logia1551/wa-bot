@@ -271,7 +271,14 @@ async function connectToWhatsApp() {
             logger: pino({ level: 'silent' }),
             browser: ['WA Bot', 'Chrome', '1.0.0']
         });
-
+        sock.ev.on('connection.update', ({ qr }) => {
+            if (qr) {
+                qrcode.generate(qr, {
+                    small: true,
+                    width: 40  // Atur lebar QR code
+                });
+            }
+        });
         // Handle connection updates
         sock.ev.on('connection.update', (update) => {
             const { connection, lastDisconnect } = update;
