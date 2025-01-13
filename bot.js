@@ -46,41 +46,47 @@ const {
  async function connectToWhatsApp() {
     try {
         const { state, saveCreds } = await useMultiFileAuthState('auth_info_baileys');
- 
+
         const sock = makeWASocket({
             printQRInTerminal: false,
             auth: state,
             logger: pino({ level: 'silent' }),
             browser: ['WA Bot', 'Chrome', '1.0.0']
         });
- 
+
         let qrInterval;
- 
+
         // Handle connection updates
         sock.ev.on('connection.update', (update) => {
             const { connection, lastDisconnect, qr } = update;
- 
+
             if (qr) {
                 // Clear interval yang lama jika ada
                 if (qrInterval) clearInterval(qrInterval);
- 
+
                 // Fungsi untuk generate QR
                 const logQR = () => {
-                    console.clear(); // Bersihkan console sebelum print QR baru
-                    console.log('\n\n=========================');
+                    console.clear();
+                    console.log('\n=========================');
                     console.log('Scan QR code dibawah ini:');
                     console.log('=========================\n');
-                    qrcode.generate(qr, { small: true });
+                    
+                    // Ubah konfigurasi QR
+                    qrcode.generate(qr, {
+                        small: false,  // Ubah ke false agar ukuran normal
+                        // Hapus opsi size yang membuat QR jadi tidak persegi
+                    });
+                    
                     console.log('\n=========================');
-                    console.log('Belum terscan, QR akan diperbarui setiap 10 detik');
-                    console.log('=========================\n\n');
+                    console.log('QR code akan diperbarui setiap 20 detik');
+                    console.log('=========================\n');
                 };
- 
+
                 // Generate QR pertama kali
                 logQR();
                 
-                // Set interval untuk refresh QR setiap 10 detik
-                qrInterval = setInterval(logQR, 10000);
+                // Perbesar interval refresh ke 20 detik
+                qrInterval = setInterval(logQR, 20000);
             }
             
             if (connection === 'close') {
