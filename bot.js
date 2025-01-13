@@ -266,22 +266,13 @@ async function connectToWhatsApp() {
         const { state, saveCreds } = await useMultiFileAuthState('auth_info_baileys');
 
         const sock = makeWASocket({
-            printQRInTerminal: false, // Matikan QR bawaan
+            printQRInTerminal: true, // Matikan QR bawaan
             auth: state,
             logger: pino({ level: 'silent' }),
             browser: ['WA Bot', 'Chrome', '1.0.0']
         });
         
-        // Tambahkan event listener untuk QR
-        sock.ev.on('connection.update', ({ qr }) => {
-            if (qr) {
-                qrcode.generate(qr, {
-                    small: false, // Set false untuk ukuran normal
-                    width: 10,    // Lebar QR
-                    height: 10    // Tinggi QR (opsional, biasanya mengikuti width)
-                });
-            }
-        });
+
         // Handle connection updates
         sock.ev.on('connection.update', (update) => {
             const { connection, lastDisconnect } = update;
