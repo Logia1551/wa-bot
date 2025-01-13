@@ -277,8 +277,8 @@ async function connectToWhatsApp() {
             if (qr) {
                 qrcode.generate(qr, {
                     small: false, // Set false untuk ukuran normal
-                    width: 40,    // Lebar QR
-                    height: 40    // Tinggi QR (opsional, biasanya mengikuti width)
+                    width: 10,    // Lebar QR
+                    height: 10    // Tinggi QR (opsional, biasanya mengikuti width)
                 });
             }
         });
