@@ -1,29 +1,20 @@
 {
   "name": "wa-bot",
   "version": "1.0.0",
-  "description": "WhatsApp Bot with Group Management and Reminder Features",
+  "description": "Simple WhatsApp Bot",
   "main": "bot.js",
   "scripts": {
-    "start": "node bot.js",
-    "dev": "nodemon bot.js"
+    "start": "node bot.js"
   },
   "keywords": [
     "whatsapp-bot",
-    "baileys",
-    "bot",
-    "group-management",
-    "reminder"
+    "bot"
   ],
-  "author": "Your Name",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "@whiskeysockets/baileys": "^6.5.0",
-    "node-schedule": "^2.1.1",
-    "pino": "^8.15.0",
-    "qrcode-terminal": "^0.12.0"
-  },
-  "devDependencies": {
-    "nodemon": "^3.0.2"
+    "pino": "^8.15.0"
   },
   "engines": {
     "node": ">=14.0.0"
